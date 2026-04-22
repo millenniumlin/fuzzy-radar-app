@@ -6,9 +6,33 @@ const cors = require('cors')
 const { Server } = require('socket.io')
 
 const app = express()
-const corsOrigin = process.env.CORS_ORIGIN || '*'
 
-app.use(cors({ origin: corsOrigin }))
+const DEFAULT_ORIGINS = ['http://localhost:5173']
+const envOrigins = (process.env.CORS_ORIGINS || '')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+
+const allowedOrigins = (envOrigins.length > 0 ? envOrigins : DEFAULT_ORIGINS).filter((origin) => {
+  try {
+    const parsed = new URL(origin)
+    return (parsed.protocol === 'http:' || parsed.protocol === 'https:') && parsed.host.length > 0
+  } catch {
+    return false
+  }
+})
+
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+      return
+    }
+    callback(new Error('Not allowed by CORS'))
+  },
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 
 app.get('/', (_req, res) => {
@@ -18,7 +42,7 @@ app.get('/', (_req, res) => {
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: corsOrigin,
+    origin: allowedOrigins,
   },
 })
 
