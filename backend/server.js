@@ -7,7 +7,8 @@ const { Server } = require('socket.io')
 
 const app = express()
 
-const DEFAULT_ORIGINS = ['http://localhost:5173']
+const DEFAULT_DEV_FRONTEND_ORIGIN = 'http://localhost:5173'
+const DEFAULT_ORIGINS = [DEFAULT_DEV_FRONTEND_ORIGIN]
 const envOrigins = (process.env.CORS_ORIGINS || '')
   .split(',')
   .map((origin) => origin.trim())
