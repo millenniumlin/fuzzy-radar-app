@@ -6,7 +6,9 @@ const cors = require('cors')
 const { Server } = require('socket.io')
 
 const app = express()
-app.use(cors())
+const corsOrigin = process.env.CORS_ORIGIN || '*'
+
+app.use(cors({ origin: corsOrigin }))
 app.use(express.json())
 
 app.get('/', (_req, res) => {
@@ -16,7 +18,7 @@ app.get('/', (_req, res) => {
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: corsOrigin,
   },
 })
 
