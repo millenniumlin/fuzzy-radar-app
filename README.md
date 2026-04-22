@@ -1,6 +1,6 @@
 # Fuzzy Radar App 📍
 
-一款基於「絕對模糊定位」與「Costco 會員訂閱��」的即時社交探索平台。
+一款基於「絕對模糊定位」與「Costco 會員訂閱制」的即時社交探索平台。
 
 ## 🌟 核心理念 (Core Concept)
 * **模糊定位 (Fuzzy Location)**：絕對不顯示精準座標，地圖上只顯示大約半徑的「模糊光圈」與大頭貼。
@@ -11,7 +11,7 @@
 ## 🛠 技術堆疊 (Tech Stack)
 * **前端 (Frontend)**: Web App (PWA) / Flutter, Leaflet.js + OpenStreetMap (深色極簡風格)
 * **後端 (Backend)**: Node.js, Express, Socket.io (即時心跳機制)
-* **資料庫 (Database)**: PostgreSQL (會員與付費資料), Redis (GEO 運算與 1 分鐘自動銷��座標)
+* **資料庫 (Database)**: PostgreSQL (會員與付費資料), Redis (GEO 運算與 1 分鐘自動銷毀座標)
 
 ## 🚀 開發藍圖 (Roadmap)
 * **Sprint 1**: 骨架與地圖 (OSM 載入、取得粗略定位)
